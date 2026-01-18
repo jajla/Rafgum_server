@@ -13,7 +13,7 @@
     <!-- Górna sekcja: logo i nazwa -->
     <div class="bg-gray-100 p-6 flex flex-col items-center">
         <img src="https://via.placeholder.com/120" alt="Logo Wulkanizacji" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full mb-4 border-4 border-blue-500">
-        <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 text-center">AutoWulkanizacja Janek</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 text-center">Autodwulkanizacjacja Janek</h1>
         <p class="text-gray-600 mt-2 text-center px-4 sm:px-0">Profesjonalna wymiana opon i serwis kół we Wrocławiu. Szybko, tanio i solidnie.</p>
     </div>
 
