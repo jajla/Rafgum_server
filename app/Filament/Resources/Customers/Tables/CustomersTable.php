@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Customers\Tables;
 
+use App\Enums\Roles;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -15,7 +16,7 @@ class CustomersTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->paginated([25, 50, 100, 'all'])
+            ->paginated([25, 50, 100])
             ->defaultPaginationPageOption(100)
             ->columns([
                 Textcolumn::make('id')
@@ -32,12 +33,12 @@ class CustomersTable
                 TextColumn::make('phone_number')
                     ->alignCenter()
                     ->label(__('filament-panels::auth/pages/register.form.phone_number.label')),
-                TextColumn::make('email')
-                /* TextColumn::make('role')
+                TextColumn::make('email'),
+                TextColumn::make('role')
                      ->alignCenter()
                      ->label(__('filament-panels::auth/pages/register.form.role.label'))
                      ->formatStateUsing(fn($state) => $state->getLabel())
-                TextColumn::make('created_at')->dateTime('d.m.Y H:i:s'),*/
+              //  TextColumn::make('created_at')->dateTime('d.m.Y H:i:s'),
             ])
             ->filters([
                 //
