@@ -17,7 +17,7 @@ class CustomersTable
     {
         return $table
             ->paginated([25, 50, 100])
-            ->defaultPaginationPageOption(100)
+          //  ->defaultPaginationPageOption(100)
             ->columns([
                 Textcolumn::make('id')
                     ->alignCenter()
