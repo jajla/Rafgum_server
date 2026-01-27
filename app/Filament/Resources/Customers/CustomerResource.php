@@ -20,6 +20,7 @@ class CustomerResource extends Resource
 {
 
     protected static ?string $model = User::class;
+    protected static string|null|BackedEnum $navigationIcon = 'heroicon-o-user-group';
 
     public static function getNavigationLabel(): string
     {
@@ -40,8 +41,6 @@ class CustomerResource extends Resource
     {
         return Auth::user()?->role === Roles::Admin;
     }
-
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     public static function form(Schema $schema): Schema
     {

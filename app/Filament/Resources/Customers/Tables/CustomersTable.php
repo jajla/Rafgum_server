@@ -17,7 +17,7 @@ class CustomersTable
     {
         return $table
             ->paginated([25, 50, 100])
-          //  ->defaultPaginationPageOption(100)
+            //  ->defaultPaginationPageOption(100)
             ->columns([
                 Textcolumn::make('id')
                     ->alignCenter()
@@ -35,10 +35,10 @@ class CustomersTable
                     ->label(__('filament-panels::auth/pages/register.form.phone_number.label')),
                 TextColumn::make('email'),
                 TextColumn::make('role')
-                     ->alignCenter()
-                     ->label(__('filament-panels::auth/pages/register.form.role.label'))
-                     ->formatStateUsing(fn($state) => $state->getLabel())
-              //  TextColumn::make('created_at')->dateTime('d.m.Y H:i:s'),
+                    ->alignCenter()
+                    ->label(__('filament-panels::auth/pages/register.form.role.label'))
+                    ->formatStateUsing(fn($state) => $state->getLabel())
+                //  TextColumn::make('created_at')->dateTime('d.m.Y H:i:s'),
             ])
             ->filters([
                 //
