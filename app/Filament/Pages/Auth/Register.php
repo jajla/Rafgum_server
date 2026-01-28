@@ -89,11 +89,21 @@ class Register extends BaseRegister
         $admins = User::where('role', Roles::Admin->value)->get();
 
         foreach ($admins as $admin) {
+            /*  Notification::make()
+                  ->title('Nowy użytkownik zarejestrowany')
+                  ->body('Email: ' . $data['email'] . ', Imię: ' . $data['name'])
+                  ->icon('heroicon-o-user-plus')
+                  ->sendToDatabase($admin);*/
             Notification::make()
-                ->title('Nowy użytkownik zarejestrowany')
-                ->body('Email: ' . $data['email'] . ', Imię: ' . $data['name'])
+                ->title(__('New user registered'))
+                ->body(__('Email: :email Name: :name Last Name: :last_name', [
+                    'email' => $data['email'],
+                    'name' => $data['name'],
+                    'last_name' => $data['last_name'],
+                ]))
                 ->icon('heroicon-o-user-plus')
                 ->sendToDatabase($admin);
+
         }
     }
 }
