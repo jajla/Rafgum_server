@@ -5,16 +5,19 @@ namespace App\Filament\Pages;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use App\Models\Feedback as FeedbackModel;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Illuminate\Support\Facades\DB;
 
 class Feedback extends Page implements HasForms, HasTable
 {
     use InteractsWithForms;
     use InteractsWithTable;
+
     protected static string|null|\BackedEnum $navigationIcon = 'heroicon-o-chat-bubble-left';
     protected static ?string $navigationLabel = 'Feedback';
     protected string $view = 'filament.pages.feedback';
@@ -42,21 +45,26 @@ class Feedback extends Page implements HasForms, HasTable
             'content' => $this->content,
         ]);
 
-      //  $this->notify('success', 'Opinia została wysłana!');
+        Notification::make()
+            ->success()
+            ->title('Opinia została wysłana!')
+            ->send();
+
         $this->reset('content');
     }
 
+
     protected function getTableQuery()
     {
+
         return FeedbackModel::query()
-            ->with('user') // jeśli chcesz pokazać kto wysłał
-            ->orderBy('created_at', 'desc');
+            ->with('user');
     }
 
     protected function getTableColumns(): array
     {
         return [
-           TextColumn::make('user.last_name')
+            TextColumn::make('user.last_name')
                 ->label('Użytkownik'),
 
             TextColumn::make('content')
