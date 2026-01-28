@@ -47,8 +47,9 @@ class Feedback extends Page implements HasForms, HasTable
 
         Notification::make()
             ->success()
-            ->title('Opinia została wysłana!')
+            ->title(__('filament-panels::resources/pages/create-record.notifications.created.title'))
             ->send();
+
 
         $this->reset('content');
     }

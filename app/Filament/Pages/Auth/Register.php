@@ -89,7 +89,7 @@ class Register extends BaseRegister
         $admins = User::where('role', Roles::Admin->value)->get();
 
         foreach ($admins as $admin) {
-            \Filament\Notifications\Notification::make()
+            Notification::make()
                 ->title('Nowy użytkownik zarejestrowany')
                 ->body('Email: ' . $data['email'] . ', Imię: ' . $data['name'])
                 ->icon('heroicon-o-user-plus')
