@@ -43,10 +43,10 @@ class AppServiceProvider extends ServiceProvider
                 ->line(Lang::get('If you did not create an account, no further action is required.'));
 
         });
-        if (app()->isLocal()) {
-        DB::listen(function ($query) {
-            logger($query->sql, $query->bindings);
-        });
-    }
+        /* if (app()->isLocal()) {
+         DB::listen(function ($query) {
+             logger($query->sql, $query->bindings);
+         });
+     }*/
     }
 }
