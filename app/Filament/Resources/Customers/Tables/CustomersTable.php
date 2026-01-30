@@ -19,54 +19,74 @@ class CustomersTable
     {
         return $table
             ->paginated([25, 50, 100])
-            //  ->defaultPaginationPageOption(100)
+            ->defaultPaginationPageOption(100)
             ->columns([
-               /* Textcolumn::make('id')
-                    ->alignCenter()
-                    ->sortable(),
-                TextColumn::make('name')
-                    ->searchable()
-                    ->alignCenter()
-                    ->label(__('filament-panels::auth/pages/register.form.name.label')),
-                TextColumn::make('last_name')
-                    ->searchable()
-                    ->alignCenter()
-                    ->label(__('filament-panels::auth/pages/register.form.last_name.label')),
-                TextColumn::make('phone_number')
-                    ->alignCenter()
-                    ->label(__('filament-panels::auth/pages/register.form.phone_number.label')),
-                TextColumn::make('email'),
-                TextColumn::make('role')
-                    ->alignCenter()
-                    ->label(__('filament-panels::auth/pages/register.form.role.label'))
-                    ->formatStateUsing(fn($state) => $state->getLabel())
-                //  TextColumn::make('created_at')->dateTime('d.m.Y H:i:s'),*/
+                /* Textcolumn::make('id')
+                     ->alignCenter()
+                     ->sortable(),
+                 TextColumn::make('name')
+                     ->searchable()
+                     ->alignCenter()
+                     ->label(__('filament-panels::auth/pages/register.form.name.label')),
+                 TextColumn::make('last_name')
+                     ->searchable()
+                     ->alignCenter()
+                     ->label(__('filament-panels::auth/pages/register.form.last_name.label')),
+                 TextColumn::make('phone_number')
+                     ->alignCenter()
+                     ->label(__('filament-panels::auth/pages/register.form.phone_number.label')),
+                 TextColumn::make('email'),
+                 TextColumn::make('role')
+                     ->alignCenter()
+                     ->label(__('filament-panels::auth/pages/register.form.role.label'))
+                     ->formatStateUsing(fn($state) => $state->getLabel())
+                 //  TextColumn::make('created_at')->dateTime('d.m.Y H:i:s'),
 
 
                 // to juz fajnie dziala tylko wycentrowac
                 Split::make([
+                    TextColumn::make('id'),
                     TextColumn::make('name')
                         ->label(__('filament-panels::auth/pages/register.form.name.label'))
-                        ->alignCenter()
+                        ->searchable(),
+                    TextColumn::make('last_name')
+                        ->label(__('filament-panels::auth/pages/register.form.last_name.label'))
+                        ->searchable(),
+                    TextColumn::make('email'),
+                    TextColumn::make('phone_number')
+                        ->label(__('filament-panels::auth/pages/register.form.phone_number.label')),
+                    TextColumn::make('role')
+                        ->label(__('filament-panels::auth/pages/register.form.role.label'))
+                        ->formatStateUsing(fn($state) => $state->getLabel()),
+                ])
+                    ->from('xl')*/
+                Split::make([
+                    TextColumn::make('id')
+                        ->icon('heroicon-o-hashtag')
+                        ->label('ID'),
+
+                    TextColumn::make('name')
+                        ->icon('heroicon-o-user-circle')
+                        ->label(__('filament-panels::auth/pages/register.form.name.label'))
                         ->searchable(),
 
                     TextColumn::make('last_name')
                         ->label(__('filament-panels::auth/pages/register.form.last_name.label'))
-                        ->alignCenter()
                         ->searchable(),
+                ])->from('sm'),
 
-                    TextColumn::make('email')->alignCenter(),
+                // ===== WIERSZ 2 =====
+                Split::make([
+                    TextColumn::make('email')->icon('heroicon-o-envelope'),
 
                     TextColumn::make('phone_number')
-                        ->alignCenter()
+                        ->icon('heroicon-o-phone')
                         ->label(__('filament-panels::auth/pages/register.form.phone_number.label')),
 
                     TextColumn::make('role')
-                        ->alignCenter()
                         ->label(__('filament-panels::auth/pages/register.form.role.label'))
                         ->formatStateUsing(fn ($state) => $state->getLabel()),
-                ])
-                    ->from('xl')
+                ])->from('xl'),
             ])
             ->filters([
                 //
