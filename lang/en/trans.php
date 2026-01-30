@@ -12,5 +12,12 @@ return [
         'navigation' => 'Feedback',
         'title' => 'Users feedback',
     ],
+
+    'Resources' => [
+        'Customers' => [
+            'navigation' => 'Customers',
+            'title' => 'Customers list',
+        ]
+    ]
 ];
 

@@ -12,4 +12,11 @@ return [
         'navigation' => 'Opinie',
         'title' => 'Opinie użytkowników',
     ],
+
+    'Resources' => [
+        'Customers' => [
+            'navigation' => 'Klienci',
+            'title' => 'Lista klientow',
+        ]
+    ]
 ];

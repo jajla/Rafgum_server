@@ -24,17 +24,12 @@ class CustomerResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return __('Customers');
+        return __('trans.Resources.Customers.navigation');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Customers');
-    }
-
-    public static function getModelLabel(): string
-    {
-        return __('Customer');
+        return __('trans.Resources.Customers.title');
     }
 
     public static function canViewAny(): bool
