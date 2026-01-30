@@ -18,8 +18,17 @@ class Feedback extends Page implements HasForms, HasTable
     use InteractsWithForms;
     use InteractsWithTable;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('trans.feedback.navigation');
+    }
+
+    public function getTitle(): string
+    {
+        return __('trans.feedback.title');
+    }
+
     protected static string|null|\BackedEnum $navigationIcon = 'heroicon-o-chat-bubble-left';
-    protected static ?string $navigationLabel = 'Feedback';
     protected string $view = 'filament.pages.feedback';
     protected static ?int $navigationSort = 3;
     public $content;

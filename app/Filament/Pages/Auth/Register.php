@@ -81,7 +81,7 @@ class Register extends BaseRegister
 
     protected function afterRegister(): void
     {
-        if ($this->notificationSent) return; // jeśli już wysłano, nic nie robimy
+        if ($this->notificationSent) return;
         $this->notificationSent = true;
 
         $data = $this->form->getState();
@@ -89,14 +89,9 @@ class Register extends BaseRegister
         $admins = User::where('role', Roles::Admin->value)->get();
 
         foreach ($admins as $admin) {
-            /*  Notification::make()
-                  ->title('Nowy użytkownik zarejestrowany')
-                  ->body('Email: ' . $data['email'] . ', Imię: ' . $data['name'])
-                  ->icon('heroicon-o-user-plus')
-                  ->sendToDatabase($admin);*/
             Notification::make()
-                ->title(__('New user registered'))
-                ->body(__('Email: :email Name: :name Last Name: :last_name', [
+                ->title(__('trans.notifications.new_user.title'))
+                ->body(__('trans.notifications.new_user.body', [
                     'email' => $data['email'],
                     'name' => $data['name'],
                     'last_name' => $data['last_name'],
