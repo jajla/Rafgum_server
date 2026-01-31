@@ -23,22 +23,37 @@ class CustomersTable
         return $table
             ->paginated([25, 50, 100])
             ->defaultPaginationPageOption(100)
-            ->columns([
-                Split::make([
+            ->columns([/*
+                Grid::make([
+                    'sm' => 1, // 📱 mały → 1 kolumna
+                    'md' => 3, // 💻 średni → 3 kolumny
+                    'xl' => 6, // 🖥 duży → 6 kolumn = 1 rząd (bo 6 pól)
+                ])->schema([
+                    TextColumn::make('id'),
+                    TextColumn::make('role'),
+                    TextColumn::make('name'),
+                    TextColumn::make('last_name'),
+                    TextColumn::make('email'),
+                    TextColumn::make('phone_number'),
+                ]),*/
+                Grid::make([
+                    'sm' => 1,
+                    'md' => 3,
+                    'lg' => 6, // 3 Stacki w jednym rzędzie
+                ])->schema([
                     Stack::make([
-                        TextColumn::make('id')->alignCenter(),
-                        TextColumn::make('role') ->formatStateUsing(fn($state) => $state->getLabel())->icon('heroicon-m-shield-check')->alignCenter(),
+                        TextColumn::make('id'),
+                        TextColumn::make('role'),
                     ]),
                     Stack::make([
-                        TextColumn::make('name')->alignCenter()->icon('heroicon-m-user'),
-                        TextColumn::make('last_name')->icon('heroicon-m-user')->alignCenter(),
+                        TextColumn::make('name'),
+                        TextColumn::make('last_name'),
                     ]),
                     Stack::make([
-                        TextColumn::make('email')->icon('heroicon-m-at-symbol')->alignCenter(),
-                        TextColumn::make('phone_number')->icon('heroicon-m-phone')->alignCenter(),
-
-                    ])
-                ])->from('lg'),
+                        TextColumn::make('email'),
+                        TextColumn::make('phone_number'),
+                    ]),
+                ]),
             ])
             ->filters([
                 //
