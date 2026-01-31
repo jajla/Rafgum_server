@@ -96,8 +96,8 @@ class CustomersTable
                         TextColumn::make('role') ->formatStateUsing(fn($state) => $state->getLabel())->icon('heroicon-m-shield-check')->alignCenter(),
                     ]),
                     Stack::make([
-                        TextColumn::make('name')->alignCenter()->icon('heroicon-m-user'),
-                        TextColumn::make('last_name')->icon('heroicon-m-user')->alignCenter(),
+                        TextColumn::make('name')->alignCenter()->icon('heroicon-m-user')->searchable(),
+                        TextColumn::make('last_name')->icon('heroicon-m-user')->alignCenter()->searchable(),
                     ]),
                     Stack::make([
                         TextColumn::make('email')->icon('heroicon-m-at-symbol')->alignCenter(),
