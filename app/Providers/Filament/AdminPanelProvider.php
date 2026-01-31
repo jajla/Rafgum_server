@@ -30,9 +30,10 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 //FilamentLanguageSwitcherPlugin::make()
             ])
+            ->sidebarFullyCollapsibleOnDesktop()
             ->default()
-            ->id('admin')
-            ->path('admin')
+            ->id('dashboard')
+            ->path('dashboard')
             ->passwordReset()
             ->registration(Register::class)
             ->login()
