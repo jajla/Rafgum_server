@@ -35,7 +35,7 @@ class CustomersTable
                     TextColumn::make('last_name'),
                     TextColumn::make('email'),
                     TextColumn::make('phone_number'),
-                ]),*/
+                ]),
                 Grid::make([
                     'sm' => 1,
                     'md' => 3,
@@ -53,7 +53,42 @@ class CustomersTable
                         TextColumn::make('email'),
                         TextColumn::make('phone_number'),
                     ]),
-                ]),
+                ]),*/
+                // MOBILE / SMALL: 1 kolumna
+                Stack::make([
+                    TextColumn::make('id'),
+                    TextColumn::make('role'),
+                    TextColumn::make('name'),
+                    TextColumn::make('last_name'),
+                    TextColumn::make('email'),
+                    TextColumn::make('phone_number'),
+                ])->hiddenFrom('md'),
+
+                // MEDIUM: 3 kolumny (Split zawierający 3 Stacki)
+                Split::make([
+                    Stack::make([
+                        TextColumn::make('id'),
+                        TextColumn::make('role'),
+                    ]),
+                    Stack::make([
+                        TextColumn::make('name'),
+                        TextColumn::make('last_name'),
+                    ]),
+                    Stack::make([
+                        TextColumn::make('email'),
+                        TextColumn::make('phone_number'),
+                    ]),
+                ])->from('md')->hiddenFrom('xl'),
+
+                // XL: 1 rząd (Split z wszystkimi kolumnami)
+                Split::make([
+                    TextColumn::make('id'),
+                    TextColumn::make('role'),
+                    TextColumn::make('name'),
+                    TextColumn::make('last_name'),
+                    TextColumn::make('email'),
+                    TextColumn::make('phone_number'),
+                ])->from('sm'),
             ])
             ->filters([
                 //
