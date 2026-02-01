@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Customers\Schemas;
 use App\Enums\Roles;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class CustomerForm
@@ -13,7 +14,21 @@ class CustomerForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
+                Section::make()
+                    ->columns(2)// dwie kolumny w sekcji
+                        ->columnSpan(2)
+                    ->schema([
+                        TextInput::make('name'),
+                        TextInput::make('last_name'),
+                        Select::make('role')->options(
+                            collect(Roles::cases())
+                                ->mapWithKeys(fn($role) => [$role->value => $role->getLabel()])
+                                ->toArray()
+                        ),
+                        TextInput::make('email'),
+                        TextInput::make('phone_number'),
+                    ])
+        /*        TextInput::make('name')
                     ->label(__('filament-panels::auth/pages/register.form.name.label')),
                 TextInput::make('last_name')
                     ->label(__('filament-panels::auth/pages/register.form.last_name.label')),
@@ -33,7 +48,7 @@ class CustomerForm
                         collect(Roles::cases())
                             ->mapWithKeys(fn($role) => [$role->value => $role->getLabel()])
                             ->toArray()
-                    ),
+                    ),*/
             ]);
     }
 }
