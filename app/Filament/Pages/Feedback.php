@@ -29,6 +29,11 @@ class Feedback extends Page implements HasForms, HasTable
 
     public function getTitle(): string
     {
+        //opcja by miec rozne tytuly w zaleznosci od roli
+
+        /*return auth()->user()?->role === \App\Enums\Roles::Admin
+            ? __('trans.feedback.title_admin')
+            : __('trans.feedback.title_user');*/
         return __('trans.feedback.title');
     }
 
@@ -41,21 +46,19 @@ class Feedback extends Page implements HasForms, HasTable
     protected function getFormSchema(): array
     {
         return [
-            Section::make('Powedz czego ci brakuje')->schema([
+            Section::make()
+                ->schema([
                 Textarea::make('content')
-                    ->label('Twoja opinia')
+                    ->label(__('trans.feedback.label'))
                     ->required()
                     ->rows(10),
-
-                Actions::make([
-                    Action::make('submit')
-                        ->label('Wyślij opinię')
-                        ->submit('submit') // wywoła metodę submit()
-                        ->color('primary'),
                 ]),
-            ]),
-
-
+                    Actions::make([
+                        Action::make('submit')
+                            ->label(__('trans.feedback.submit'))
+                            ->submit('submit') // wywoła metodę submit()
+                            ->color('primary'),
+            ])
         ];
     }
 
@@ -73,9 +76,7 @@ class Feedback extends Page implements HasForms, HasTable
             ->success()
             ->title(__('filament-panels::resources/pages/create-record.notifications.created.title'))
             ->send();
-
-
-        $this->reset('content');
+        return redirect('/dashboard');
     }
 
 
