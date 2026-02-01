@@ -19,6 +19,7 @@ return [
         'Customers' => [
             'navigation' => 'Customers',
             'title' => 'Customers list',
+            'label' => 'Customer',
         ]
     ]
 ];
