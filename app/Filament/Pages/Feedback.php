@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use Carbon\Carbon;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -82,7 +83,8 @@ class Feedback extends Page implements HasForms, HasTable
     {
 
         return FeedbackModel::query()
-            ->with('user');
+            ->with('user')
+            ->orderByDesc('created_at');
     }
 
     protected function getTableColumns(): array
@@ -96,19 +98,36 @@ class Feedback extends Page implements HasForms, HasTable
                 ->limit(50)
                 ->wrap(),
 
-            TextColumn::make('created_at')
+      /*      TextColumn::make('created_at')
                 ->label('Data')
-                ->dateTime('d-m-Y H:i')
-                ->sortable(),
+                ->formatStateUsing(fn($state) => Carbon::parse($state)
+                    ->translatedFormat('j F H:i')
+                ),
+
+            TextColumn::make('updated_at')
+                ->label('Data')
+                ->formatStateUsing(fn($state) => Carbon::parse($state)
+                    ->translatedFormat('H:i')
+                )*/
+
+            TextColumn::make('created_at') // pole w tabeli może być „status” lub cokolwiek
+            ->label('Status')
+                ->formatStateUsing(fn($state, $record) =>
+                Carbon::parse($record->created_at)->greaterThan(Carbon::now()->subDays(7))
+                    ? 'Nowy'
+                    : 'Stary'
+                )
+                ->badge() // w tym wypadku badge bierze tekst z formatStateUsing
+                ->colors([
+                    'success' => fn($state, $record) => Carbon::parse($record->created_at)->greaterThan(Carbon::now()->subDays(7)),
+                    'secondary' => fn($state, $record) => Carbon::parse($record->created_at)->lessThanOrEqualTo(Carbon::now()->subDays(7)),
+                ])
         ];
     }
-
-    protected function getTableActions(): array
-    {
-        return [
-            // brak edycji/usuwania, można dodać np. przycisk "Pokaż szczegóły" jeśli chcesz
-        ];
-    }
-
-
+    /*   protected function getTableActions(): array
+       {
+           return [
+               // brak edycji/usuwania, można dodać np. przycisk "Pokaż szczegóły" jeśli chcesz
+           ];
+       }*/
 }
