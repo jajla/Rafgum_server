@@ -19,6 +19,7 @@ return [
         'Customers' => [
             'navigation' => 'Klienci',
             'title' => 'Lista klientow',
+            'label' => 'Profl Klienta',
         ]
     ]
 ];
