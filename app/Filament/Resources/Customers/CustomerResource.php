@@ -26,7 +26,10 @@ class CustomerResource extends Resource
     {
         return __('trans.Resources.Customers.navigation');
     }
-
+    public static function getModelLabel(): string
+    {
+        return __('trans.Resources.Customers.label');
+    }
     public static function getPluralModelLabel(): string
     {
         return __('trans.Resources.Customers.title');
