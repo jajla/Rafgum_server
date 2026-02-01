@@ -11,6 +11,8 @@ return [
     'feedback' => [
         'navigation' => 'Opinie',
         'title' => 'Opinie użytkowników',
+        'submit'=> 'wyślij opinie',
+        'label' => 'czego ci brakuje na stronie?',
     ],
 
     'Resources' => [
