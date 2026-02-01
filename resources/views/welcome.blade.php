@@ -74,12 +74,12 @@
 
     <!-- Logowanie / Rejestracja -->
     <div class="p-6 flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/admin/login"
+        <a href="/dashboard/login"
            class="w-full sm:w-auto bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold text-center hover:bg-indigo-700 transition transform hover:scale-105">
             Zaloguj się
         </a>
 
-        <a href="/admin/register"
+        <a href="/dashboard/register"
            class="w-full sm:w-auto bg-green-600 text-white px-6 py-3 rounded-full font-semibold text-center hover:bg-green-700 transition transform hover:scale-105">
             Zarejestruj się
         </a>
