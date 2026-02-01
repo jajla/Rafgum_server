@@ -2,12 +2,16 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Actions\Action;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use App\Models\Feedback as FeedbackModel;
+use Filament\Schemas\Components\Actions;
+use Filament\Schemas\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -37,10 +41,21 @@ class Feedback extends Page implements HasForms, HasTable
     protected function getFormSchema(): array
     {
         return [
-            Textarea::make('content')
-                ->label('Twoja opinia')
-                ->required()
-                ->rows(10),
+            Section::make('Powedz czego ci brakuje')->schema([
+                Textarea::make('content')
+                    ->label('Twoja opinia')
+                    ->required()
+                    ->rows(10),
+
+                Actions::make([
+                    Action::make('submit')
+                        ->label('Wyślij opinię')
+                        ->submit('submit') // wywoła metodę submit()
+                        ->color('primary'),
+                ]),
+            ]),
+
+
         ];
     }
 

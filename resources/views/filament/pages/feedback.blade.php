@@ -5,10 +5,6 @@
         <x-filament::card>
             <form wire:submit.prevent="submit">
                 {{ $this->form }}
-
-                <x-filament::button type="submit">
-                    Wyślij opinię
-                </x-filament::button>
             </form>
         </x-filament::card>
     @endif
