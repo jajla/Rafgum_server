@@ -11,6 +11,8 @@ return [
     'feedback' => [
         'navigation' => 'Feedback',
         'title' => 'Users feedback',
+        'submit' => 'Send feedback',
+        'label'  => 'What do you think is missing from our website?',
     ],
 
     'Resources' => [

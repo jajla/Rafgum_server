@@ -46,18 +46,16 @@ class Feedback extends Page implements HasForms, HasTable
     protected function getFormSchema(): array
     {
         return [
-            Section::make()
-                ->schema([
-                Textarea::make('content')
-                    ->label(__('trans.feedback.label'))
-                    ->required()
-                    ->rows(10),
-                ]),
-                    Actions::make([
-                        Action::make('submit')
-                            ->label(__('trans.feedback.submit'))
-                            ->submit('submit') // wywoła metodę submit()
-                            ->color('primary'),
+            Textarea::make('content')
+                ->label(__('trans.feedback.label'))
+                ->required()
+                ->rows(10),
+
+            Actions::make([
+                Action::make('submit')
+                    ->label(__('trans.feedback.submit'))
+                    ->submit('submit') // wywoła metodę submit()
+                    ->color('primary'),
             ])
         ];
     }
