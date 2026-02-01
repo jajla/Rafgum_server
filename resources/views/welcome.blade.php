@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoWulkanizacja Janek</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="/favicon.ico?v=2">
+    <link rel="icon" href="/favicon.png?v=2">
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
