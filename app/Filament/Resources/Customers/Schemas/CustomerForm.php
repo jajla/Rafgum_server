@@ -14,10 +14,14 @@ class CustomerForm
     {
         return $schema
             ->components([
+                Section::make()
+                    ->columnSpan('full')
+                    ->columns(2)
+            ->schema([
+
+
                 // ===== SEKCJA 1: 2 pola obok siebie =====
                 Section::make('')
-                    ->columns(2)
-                    ->columnSpan('full')
                     ->schema([
                         TextInput::make('name')
                             ->label(__('filament-panels::auth/pages/register.form.name.label')),
@@ -27,8 +31,7 @@ class CustomerForm
 
                 // ===== SEKCJA 2: 3 pola obok siebie =====
                 Section::make('')
-                    ->columns(3)
-                    ->columnSpan('full')
+
                     ->schema([
                         TextInput::make('phone_number')
                             ->label(__('filament-panels::auth/pages/register.form.phone_number.label')),
@@ -49,6 +52,7 @@ class CustomerForm
                                     ->toArray()
                             ),
                     ]),
+                ]),
 
                /* Section::make()
                     ->columns(2)// dwie kolumny w sekcji
