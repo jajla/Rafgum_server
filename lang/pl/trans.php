@@ -10,9 +10,9 @@ return [
 
     'feedback' => [
         'navigation' => 'Opinie',
-        'title' => 'Opinie użytkowników',
+        'title' => 'Opinie Klientów',
         'submit'=> 'wyślij opinie',
-        'label' => 'czego ci brakuje na stronie?',
+        'label' => 'Czego brakuje na naszej stronie twoim zdaniem?',
     ],
 
     'Resources' => [
