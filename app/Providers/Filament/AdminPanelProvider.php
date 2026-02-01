@@ -30,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 //FilamentLanguageSwitcherPlugin::make()
             ])
+            ->favicon(asset('favicon.ico'))
             ->sidebarFullyCollapsibleOnDesktop()
             ->default()
             ->id('dashboard')
