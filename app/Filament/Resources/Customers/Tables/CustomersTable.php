@@ -21,7 +21,8 @@ class CustomersTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->paginated([25, 50, 100])
+            ->searchable(['name', 'last_name', 'email'])
+            ->paginated([100,'all'])
             ->defaultPaginationPageOption(100)
             ->columns([
 //GRID
@@ -40,16 +41,27 @@ class CustomersTable
 
                 Split::make([
                     Stack::make([
-                        TextColumn::make('id')->alignCenter(),
-                        TextColumn::make('role')->formatStateUsing(fn($state) => $state->getLabel())->icon('heroicon-m-shield-check')->alignCenter(),
+                        TextColumn::make('id')
+                            ->alignCenter(),
+                        TextColumn::make('role')
+                            ->formatStateUsing(fn($state) => $state->getLabel())->icon('heroicon-m-shield-check')
+                            ->alignCenter(),
                     ]),
                     Stack::make([
-                        TextColumn::make('name')->alignCenter()->icon('heroicon-m-user')->searchable(),
-                        TextColumn::make('last_name')->icon('heroicon-m-user')->alignCenter()->searchable(),
+                        TextColumn::make('name')
+                            ->alignCenter()
+                            ->icon('heroicon-m-user'),
+                        TextColumn::make('last_name')
+                            ->icon('heroicon-m-user')
+                            ->alignCenter(),
                     ]),
                     Stack::make([
-                        TextColumn::make('email')->icon('heroicon-m-at-symbol')->alignCenter()->searchable(),
-                        TextColumn::make('phone_number')->icon('heroicon-m-phone')->alignCenter(),
+                        TextColumn::make('email')->icon('heroicon-m-at-symbol')
+                            ->alignCenter(),
+
+                        TextColumn::make('phone_number')
+                            ->icon('heroicon-m-phone')
+                            ->alignCenter(),
 
                     ])
                 ])->from('md'),
