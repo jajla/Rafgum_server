@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Providers;
-
-use App\Http\Responses\LogoutResponse;
+use App\Http\Responses\CustomLogoutResponse;
 use BezhanSalleh\LanguageSwitch\LanguageSwitch;
-use Filament\Http\Responses\Auth\Contracts\LogoutResponse as LogoutResponseContract;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\ServiceProvider;
+use Filament\Auth\Http\Responses\Contracts\LogoutResponse as FilamentLogoutResponse;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-
+        $this->app->bind(FilamentLogoutResponse::class, CustomLogoutResponse::class);
     }
 
     /**
