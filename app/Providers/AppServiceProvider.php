@@ -4,13 +4,9 @@ namespace App\Providers;
 
 use App\Http\Responses\LogoutResponse;
 use BezhanSalleh\LanguageSwitch\LanguageSwitch;
-use Filament\Events\ServingFilament;
-use Filament\Facades\Filament;
+use Filament\Http\Responses\Auth\Contracts\LogoutResponse as LogoutResponseContract;
 use Illuminate\Auth\Notifications\VerifyEmail;
-use Illuminate\Console\Scheduling\Event;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,9 +15,10 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
+
     public function register(): void
     {
-        $this->app->bind(LogoutResponse::class, LogoutResponse::class);
+
     }
 
     /**
