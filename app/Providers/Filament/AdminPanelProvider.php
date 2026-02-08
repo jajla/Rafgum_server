@@ -37,6 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->registration(Register::class)
             ->login()
             ->profile()
+            //->getLogoutUrl(route('welcome'))
             ->databaseNotifications()
             ->emailVerification()
             ->colors([

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Responses\LogoutResponse;
 use BezhanSalleh\LanguageSwitch\LanguageSwitch;
 use Filament\Events\ServingFilament;
 use Filament\Facades\Filament;
@@ -20,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(LogoutResponse::class, LogoutResponse::class);
     }
 
     /**
