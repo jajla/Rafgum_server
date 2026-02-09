@@ -14,7 +14,7 @@ use TomatoPHP\FilamentLanguageSwitcher\Traits\InteractsWithLanguages;
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory,Notifiable;
+    use HasFactory, Notifiable;
     use InteractsWithLanguages;
 
     /**
@@ -51,12 +51,22 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'role'=> Roles::class,
+            'role' => Roles::class,
         ];
     }
+
     public function sendEmailVerificationNotification(): void
     {
         $this->notify(new VerifyEmailCustom());
     }
+/* potrzebne do zmiany nazwy w url jesli ma byc w url roel usera
+    public function getRouteKey(): string
+    {
+        return $this->role->value;
+    }*/
 
+    public function getRouteKeyName(): string
+    {
+        return 'email';
+    }
 }
