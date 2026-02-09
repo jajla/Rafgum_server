@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Providers;
+
 use App\Http\Responses\CustomLogoutResponse;
+use BezhanSalleh\LanguageSwitch\Enums\Placement;
 use BezhanSalleh\LanguageSwitch\LanguageSwitch;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -27,7 +29,8 @@ class AppServiceProvider extends ServiceProvider
     {
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch
-                ->locales(['en', 'pl']); // also accepts a closure
+                ->locales(['en', 'pl'])
+                ->visible(outsidePanels: true);
         });
 
 
