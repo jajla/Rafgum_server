@@ -59,11 +59,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new VerifyEmailCustom());
     }
-/* potrzebne do zmiany nazwy w url jesli ma byc w url roel usera
-    public function getRouteKey(): string
-    {
-        return $this->role->value;
-    }*/
+
+    /* potrzebne do zmiany nazwy w url jesli ma byc w url roel usera
+        public function getRouteKey(): string
+        {
+            return $this->role->value;
+        }*/
 
     public function getRouteKeyName(): string
     {
