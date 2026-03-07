@@ -35,7 +35,7 @@
         </div>
         <div class="flex flex-col items-center">
             <i class="fas fa-map-marker-alt text-red-500 text-2xl mb-2"></i>
-            <p class="text-gray-700 font-semibold">ul. Kościuszki 12, Wrocław</p>
+            <p class="text-gray-700 font-semibold">test na nowym windows</p>
         </div>
     </div>
 
