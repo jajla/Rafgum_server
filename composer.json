@@ -11,7 +11,7 @@
         "filament/filament": "~4.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "opcodesio/log-viewer": "^3.21",
+        "opcodesio/log-viewer": "^3.23",
         "tomatophp/filament-language-switcher": "^4.0"
     },
     "require-dev": {
