@@ -10,7 +10,7 @@ use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Utilities\Get;
 
 use App\Services\VisitService;
-use App\Enums\Role;
+use App\Enums\Roles;
 use App\Enums\Services;
 use App\Models\User;
 use App\Models\Visit;
@@ -21,14 +21,16 @@ class VisitForm
     {
         $dateFormat = 'Y-m-d';
         return $schema
-            ->components([
+            ->components([            
                 Select::make('user_id')
                     ->label(__('trans.form.user_id'))
                     ->native(false)
                     ->options(User::query()
                         ->get()
                         ->mapWithKeys(fn($user) => [$user->id => $user->last_name]))
-                    ->required(),
+                    ->required()
+                    ->visible(fn () => auth()->user()?->role === Roles::Admin)
+    ->required(fn () => auth()->user()?->role === Roles::Admin),
                DatePicker::make('date')
                     ->minDate(now()->format($dateFormat))
                     //->native(false)

@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use App\Enums\Roles;
 
 class VisitsTable
 {
@@ -16,7 +17,8 @@ class VisitsTable
             ->columns([
                 TextColumn::make('user_id')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->hidden(fn () => auth()->user()?->role !== Roles::Admin),
                 TextColumn::make('date')
                     ->date()
                     ->sortable(),

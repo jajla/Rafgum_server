@@ -8,4 +8,14 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateVisit extends CreateRecord
 {
     protected static string $resource = VisitResource::class;
+
+     protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        // jeśli nie admin -> ustaw aktualnego usera
+        if (auth()->user()?->role !== Role::ADMIN) {
+            $data['user_id'] = auth()->id();
+        }
+
+        return $data;
+    }
 }
