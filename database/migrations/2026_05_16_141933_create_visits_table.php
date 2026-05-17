@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('visits', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnelete();
+            $table->date('date');
+            $table->time('time');
+            $table->string('service_type');
+            $table->string('status')->default('pending');
             $table->timestamps();
+            $table->index(['date', 'time']);
         });
     }
 
