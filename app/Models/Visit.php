@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
+use App\Enums\Services;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Visit extends Model
 {
       use HasFactory;
+
     protected $fillable = [
         'user_id',
         'date',
         'time',
+        'status',
         'service_type',
     ];
 
