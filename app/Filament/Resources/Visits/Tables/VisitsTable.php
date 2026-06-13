@@ -38,7 +38,7 @@ class VisitsTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make() ->authorize(fn ($record) => auth()->user()?->role === Roles::Admin),
             ])
             ->toolbarActions([
                 // BulkActionGroup::make([

@@ -56,13 +56,25 @@ class VisitForm
 
               
          
+                // Select::make('time')
+                //     ->label(__('trans.Resources.Visits.time'))
+                //     ->options(fn(Get $get) => (new VisitService())->getAvailableTimesForDate($get('date')))
+                //     ->hidden(fn(Get $get) => !$get('date'))
+                //     ->required()
+                //     ->formatStateUsing(fn($state) => date('H:i', strtotime($state)))
+                //     ->native(false),
+
                 Select::make('time')
-                    ->label(__('trans.Resources.Visits.time'))
-                    ->options(fn(Get $get) => (new VisitService())->getAvailableTimesForDate($get('date')))
-                    ->hidden(fn(Get $get) => !$get('date'))
-                    ->required()
-                    ->formatStateUsing(fn($state) => date('H:i', strtotime($state)))
-                    ->native(false),
+    ->label(__('trans.Resources.Visits.time'))
+    ->options(fn(Get $get, $record) =>
+        (new VisitService())->getAvailableTimesForDate(
+            $get('date'),
+            $record?->id
+        )
+    )
+    ->required()
+    ->formatStateUsing(fn($state) => date('H:i', strtotime($state)))
+    ->native(false),
 
                 Select::make('service_type')
                     ->label(__('trans.Resources.Visits.service'))

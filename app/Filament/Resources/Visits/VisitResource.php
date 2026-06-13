@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use App\Enums\Roles;
 
 class VisitResource extends Resource
 {
@@ -21,6 +22,11 @@ class VisitResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'visit';
+
+    public static function canEdit($record): bool
+    {
+    return auth()->user()?->role === Roles::Admin;
+    }
 
     public static function form(Schema $schema): Schema
     {

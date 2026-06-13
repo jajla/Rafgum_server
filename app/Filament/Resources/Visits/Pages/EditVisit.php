@@ -6,6 +6,7 @@ use App\Filament\Resources\Visits\VisitResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
+
 class EditVisit extends EditRecord
 {
     protected static string $resource = VisitResource::class;
