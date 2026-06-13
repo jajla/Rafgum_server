@@ -9,6 +9,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Carbon\Carbon;
 use App\Enums\Roles;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Filters\Filter;
+use Filament\Forms\Components\DatePicker;
+
 
 class VisitsTable
 {
@@ -35,7 +39,19 @@ class VisitsTable
                     ->searchable(),
             ])
             ->filters([
-                //
+                        Filter::make('date')
+                ->form([
+                    DatePicker::make('date')
+                        ->label('Data wizyt')
+                        ->default(today())
+                        ->native(false),
+                ])
+                ->query(function (Builder $query, array $data) {
+                    return $query->whereDate(
+                        'date',
+                        $data['date'] ?? today()
+                    );
+                }),
             ])
             ->recordActions([
                 EditAction::make()->authorize(fn($record) => auth()->user()?->role === Roles::Admin),
