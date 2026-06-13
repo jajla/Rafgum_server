@@ -20,6 +20,12 @@ return [
             'navigation' => 'Customers',
             'title' => 'Customers list',
             'label' => 'Customer',
+        ],
+        'Visits'=>[
+            'user'=>'user',
+            'date'=> 'date',
+            'time'=>'time',
+            'service'=>'service'
         ]
     ]
 ];

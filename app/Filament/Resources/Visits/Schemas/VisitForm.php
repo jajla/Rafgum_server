@@ -9,6 +9,7 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Utilities\Get;
 
+use Filament\Schemas\Components\Section;
 use App\Services\VisitService;
 use App\Enums\Roles;
 use App\Enums\Services;
@@ -20,24 +21,43 @@ class VisitForm
     public static function configure(Schema $schema): Schema
     {
         $dateFormat = 'Y-m-d';
+
         return $schema
-            ->components([            
+            ->components([    
+
+                 
+                Section::make()
+                    ->columnSpan('full')
+                    ->columns(2)
+                    ->schema([
+            Section::make('')
+            ->schema([
                 Select::make('user_id')
-                    ->label(__('trans.form.user_id'))
+                    ->label(__('trans.Resources.Visits.user'))
                     ->native(false)
                     ->options(User::query()
                         ->get()
                         ->mapWithKeys(fn($user) => [$user->id => $user->last_name]))
                     ->required()
                     ->visible(fn () => auth()->user()?->role === Roles::Admin)
-    ->required(fn () => auth()->user()?->role === Roles::Admin),
+                    ->required(fn () => auth()->user()?->role === Roles::Admin),
                DatePicker::make('date')
+               ->label(__('trans.Resources.Visits.date'))
                     ->minDate(now()->format($dateFormat))
                     //->native(false)
                     ->required()
                    //->displayFormat('d F Y')
                     ->live(),
+
+            ]),
+
+          
+                Section::make([''])->schema([
+
+              
+         
                 Select::make('time')
+                    ->label(__('trans.Resources.Visits.time'))
                     ->options(fn(Get $get) => (new VisitService())->getAvailableTimesForDate($get('date')))
                     ->hidden(fn(Get $get) => !$get('date'))
                     ->required()
@@ -45,12 +65,14 @@ class VisitForm
                     ->native(false),
 
                 Select::make('service_type')
-                    ->label(__('trans.form.service_type'))
+                    ->label(__('trans.Resources.Visits.service'))
                     ->options(
                         collect(Services::cases())
                             ->mapWithKeys(fn($role) => [$role->value => $role->getLabel()])
                             ->toArray()
                     )->required(),
-            ]);
+                ])
+                    ])
+        ]);
     }
 }

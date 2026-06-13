@@ -5,7 +5,7 @@ return [
         'new_user' => [
             'title' => 'Nowy użytkownik zarejestrowany',
             'body' => 'Email: :email Imię: :name Nazwisko: :last_name',
-        ],
+        ]
     ],
 
     'feedback' => [
@@ -20,6 +20,12 @@ return [
             'navigation' => 'Klienci',
             'title' => 'Lista klientow',
             'label' => 'Profl Klienta',
+        ],
+        'Visits'=>[
+            'user'=>'Klient',
+            'date'=> 'dzien',
+            'time'=>'czas',
+            'service'=>'usluga'
         ]
     ]
 ];
