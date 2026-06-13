@@ -19,7 +19,7 @@ class VisitsTable
                 TextColumn::make('user.last_name')
                     ->numeric()
                     ->sortable()
-                    ->hidden(fn () => auth()->user()?->role !== Roles::Admin),
+                    ->hidden(fn() => auth()->user()?->role !== Roles::Admin),
                 TextColumn::make('date')
                     ->date()
                     ->sortable()
@@ -38,7 +38,7 @@ class VisitsTable
                 //
             ])
             ->recordActions([
-                EditAction::make() ->authorize(fn ($record) => auth()->user()?->role === Roles::Admin),
+                EditAction::make()->authorize(fn($record) => auth()->user()?->role === Roles::Admin),
             ])
             ->toolbarActions([
                 // BulkActionGroup::make([
