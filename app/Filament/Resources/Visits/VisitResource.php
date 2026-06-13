@@ -21,7 +21,20 @@ class VisitResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'visit';
+       public static function getNavigationLabel(): string
+    {
+        return __('trans.Resources.Visits.navigation');
+    }
+    public static function getModelLabel(): string
+    {
+        return __('trans.Resources.Visits.label');
+    }
+    public static function getPluralModelLabel(): string
+    {
+        return __('trans.Resources.Visits.title');
+    }
+
+    //protected static ?string $recordTitleAttribute = 'visit';
 
     public static function canEdit($record): bool
     {

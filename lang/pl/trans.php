@@ -22,6 +22,9 @@ return [
             'label' => 'Profl Klienta',
         ],
         'Visits'=>[
+            'navigation' => 'Zapisy',
+            'title' => 'Lista zapisanych klientow',
+            'label' => 'Wizyte',
             'user'=>'Klient',
             'date'=> 'dzien',
             'time'=>'czas',
