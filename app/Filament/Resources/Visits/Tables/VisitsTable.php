@@ -22,24 +22,25 @@ class VisitsTable
         return $table
             ->columns([
                 TextColumn::make('user.last_name')
-                    ->numeric()
-                    ->sortable()
+                ->searchable()
                     ->hidden(fn() => auth()->user()?->role !== Roles::Admin),
                 TextColumn::make('date')
-                    ->date()
-                    ->sortable()
                     ->formatStateUsing(fn($state) => Carbon::parse($state)
                         ->translatedFormat('j F l')),
                 TextColumn::make('time')
-                    ->time()
-                    ->formatStateUsing(fn($state) => date('H:i', strtotime($state)))
-                    ->sortable(),
+                    ->formatStateUsing(fn($state) => date('H:i', strtotime($state))),
                 TextColumn::make('service_type')
-                    ->searchable()
                           ->formatStateUsing(fn (Services $state) => $state->getLabel()),
-                TextColumn::make('status')
-                    ->searchable(),
-            ])
+                TextColumn::make('status'),
+            ])   ->modifyQueryUsing(function (Builder $query) {
+        $user = auth()->user();
+
+        if ($user->role === Roles::Admin) {
+            return $query;
+        }
+
+        return $query->where('user_id', $user->id);
+    })
             ->filters([
                 //         Filter::make('date')
                 // ->form([
