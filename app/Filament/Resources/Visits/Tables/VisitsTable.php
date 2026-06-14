@@ -2,18 +2,15 @@
 
 namespace App\Filament\Resources\Visits\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use App\Enums\Roles;
+use App\Enums\Services;
+use Carbon\Carbon;
+use Filament\Tables\Filters\Filter;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Carbon\Carbon;
-use App\Enums\Roles;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Tables\Filters\Filter;
-use Filament\Forms\Components\DatePicker;
-use App\Enums\Services;
-
+use  Filament\Forms\Components\DatePicker;
 
 class VisitsTable
 {
@@ -22,42 +19,40 @@ class VisitsTable
         return $table
             ->columns([
                 TextColumn::make('user.last_name')
-                ->searchable()
+                    ->searchable()
                     ->hidden(fn() => auth()->user()?->role !== Roles::Admin),
                 TextColumn::make('date')
                     ->formatStateUsing(fn($state) => Carbon::parse($state)
-                        ->translatedFormat('j F l')),
+                    ->translatedFormat('j F l')),
                 TextColumn::make('time')
                     ->formatStateUsing(fn($state) => date('H:i', strtotime($state))),
                 TextColumn::make('service_type')
-                          ->formatStateUsing(fn (Services $state) => $state->getLabel()),
+                    ->formatStateUsing(fn(Services $state) => $state->getLabel()),
                 TextColumn::make('status'),
-            ])   ->modifyQueryUsing(function (Builder $query) {
-        $user = auth()->user();
+            ])
+            ->modifyQueryUsing(function (Builder $query) {
+                $user = auth()->user();
+                if ($user->role === Roles::Admin) {
+                    return $query;
+                }
 
-        if ($user->role === Roles::Admin) {
-            return $query;
-        }
-
-        return $query->where('user_id', $user->id);
-    })
+                return $query
+                    ->where('user_id', $user->id);
+            })
             ->filters([
-                //         Filter::make('date')
-                // ->form([
-                //     DatePicker::make('date')
-                //         ->label('Data wizyt')
-                //         ->default(today())
-                //         ->native(false),
-                // ])
-                // ->query(function (Builder $query, array $data) {
-                //     return $query->whereDate(
-                //         'date',
-                //         $data['date'] ?? today()
-                //     );
-                // }),
+Filter::make('date')
+    ->form([
+        DatePicker::make('date')
+    ])
+    ->query(function (Builder $query, array $data) {
+        if (!empty($data['date'])) {
+            $query->whereDate('date', $data['date']);
+        }
+    })
+    
             ])
             ->recordActions([
-                EditAction::make()->authorize(fn($record) => auth()->user()?->role === Roles::Admin),
+                EditAction::make(), // ->authorize(fn($record) => auth()->user()?->role === Roles::Admin),
             ])
             ->toolbarActions([
                 // BulkActionGroup::make([
