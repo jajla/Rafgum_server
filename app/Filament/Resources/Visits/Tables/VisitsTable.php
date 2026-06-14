@@ -12,6 +12,7 @@ use App\Enums\Roles;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\DatePicker;
+use App\Enums\Services;
 
 
 class VisitsTable
@@ -34,24 +35,25 @@ class VisitsTable
                     ->formatStateUsing(fn($state) => date('H:i', strtotime($state)))
                     ->sortable(),
                 TextColumn::make('service_type')
-                    ->searchable(),
+                    ->searchable()
+                          ->formatStateUsing(fn (Services $state) => $state->getLabel()),
                 TextColumn::make('status')
                     ->searchable(),
             ])
             ->filters([
-                        Filter::make('date')
-                ->form([
-                    DatePicker::make('date')
-                        ->label('Data wizyt')
-                        ->default(today())
-                        ->native(false),
-                ])
-                ->query(function (Builder $query, array $data) {
-                    return $query->whereDate(
-                        'date',
-                        $data['date'] ?? today()
-                    );
-                }),
+                //         Filter::make('date')
+                // ->form([
+                //     DatePicker::make('date')
+                //         ->label('Data wizyt')
+                //         ->default(today())
+                //         ->native(false),
+                // ])
+                // ->query(function (Builder $query, array $data) {
+                //     return $query->whereDate(
+                //         'date',
+                //         $data['date'] ?? today()
+                //     );
+                // }),
             ])
             ->recordActions([
                 EditAction::make()->authorize(fn($record) => auth()->user()?->role === Roles::Admin),
