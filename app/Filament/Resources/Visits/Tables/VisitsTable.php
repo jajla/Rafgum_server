@@ -10,7 +10,7 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use  Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DatePicker;
 
 class VisitsTable
 {
@@ -23,7 +23,7 @@ class VisitsTable
                     ->hidden(fn() => auth()->user()?->role !== Roles::Admin),
                 TextColumn::make('date')
                     ->formatStateUsing(fn($state) => Carbon::parse($state)
-                    ->translatedFormat('j F l')),
+                        ->translatedFormat('j F l')),
                 TextColumn::make('time')
                     ->formatStateUsing(fn($state) => date('H:i', strtotime($state))),
                 TextColumn::make('service_type')
@@ -35,21 +35,19 @@ class VisitsTable
                 if ($user->role === Roles::Admin) {
                     return $query;
                 }
-
                 return $query
                     ->where('user_id', $user->id);
             })
             ->filters([
-Filter::make('date')
-    ->form([
-        DatePicker::make('date')
-    ])
-    ->query(function (Builder $query, array $data) {
-        if (!empty($data['date'])) {
-            $query->whereDate('date', $data['date']);
-        }
-    })
-    
+                Filter::make('date')
+                    ->form([
+                        DatePicker::make('date')
+                    ])
+                    ->query(function (Builder $query, array $data) {
+                        if (!empty($data['date'])) {
+                            $query->whereDate('date', $data['date']);
+                        }
+                    })
             ])
             ->recordActions([
                 EditAction::make(), // ->authorize(fn($record) => auth()->user()?->role === Roles::Admin),
