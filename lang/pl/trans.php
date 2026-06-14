@@ -22,8 +22,9 @@ return [
             'label' => 'Profl Klienta',
         ],
         'Visits'=>[
-            'navigation' => 'Zapisy',
-            'title' => 'Lista zapisanych klientow',
+            'navigation' => 'Terminy',
+            'title_admin' => 'Lista zapisanych klientow',
+            'title' => 'twoje terminy',
             'label' => 'Wizyte',
             'user'=>'Klient',
             'date'=> 'dzien',

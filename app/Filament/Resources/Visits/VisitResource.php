@@ -19,19 +19,22 @@ class VisitResource extends Resource
 {
     protected static ?string $model = Visit::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-calendar-days';
 
        public static function getNavigationLabel(): string
     {
         return __('trans.Resources.Visits.navigation');
     }
+
     public static function getModelLabel(): string
     {
         return __('trans.Resources.Visits.label');
     }
     public static function getPluralModelLabel(): string
     {
-        return __('trans.Resources.Visits.title');
+        return auth()->user()?->role === Roles::Admin
+        ? __('trans.Resources.Visits.title_admin')
+        : __('trans.Resources.Visits.title');
     }
 
     //protected static ?string $recordTitleAttribute = 'visit';
