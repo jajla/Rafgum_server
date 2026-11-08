@@ -42,6 +42,11 @@ class VisitService
 
     //     return $availableReservations;
     // }
+   
+   
+   
+   
+   
     public function getAvailableTimesForDate(?string $date, ?int $ignoreVisitId = null): array
 {
     if (!$date) {
