@@ -68,7 +68,63 @@ class VisitForm
                                 ->required()
                                 ->formatStateUsing(fn($state) => date('H:i', strtotime($state)))
                                 ->native(false),
+Select::make('status')
+                                ->label('Rodzaj rezerwacji')
+                                ->options(function (Get $get, $record) {
 
+                                    if (!$get('date') || !$get('time')) {
+                                        return [];
+                                    }
+
+                                    $query = Visit::whereDate(
+                                        'date',
+                                        $get('date')
+                                    )->whereTime(
+                                        'time',
+                                        $get('time')
+                                    );
+
+                                    if ($record) {
+                                        $query->where(
+                                            'id',
+                                            '!=',
+                                            $record->id
+                                        );
+                                    }
+
+                                    $visits = $query->get();
+
+                                    $hasMain = $visits->contains(
+                                        'status',
+                                        'glowny'
+                                    );
+
+                                    $hasAdditional = $visits->contains(
+                                        'status',
+                                        'dodatkowy'
+                                    );
+
+                                    $options = [];
+
+                                    if (!$hasMain) {
+                                        $options['glowny'] = 'Główny';
+                                    }
+
+                                    if (!$hasAdditional) {
+                                        $options['dodatkowy'] = 'Dodatkowy';
+                                    }
+
+                                    return $options;
+                                })
+                                ->default('glowny')
+                                ->visible(
+                                    fn () => auth()->user()?->role === Roles::Admin
+                                )
+                                ->required(
+                                    fn () => auth()->user()?->role === Roles::Admin
+                                )
+                                ->native(false),
+                                
                             Select::make('service_type')
                                 ->label(__('trans.Resources.Visits.service'))
                                 ->options(
